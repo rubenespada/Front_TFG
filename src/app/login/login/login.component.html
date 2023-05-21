@@ -1,0 +1,35 @@
+<div class="container">
+
+    <div class="col" style="text-align:center;">
+      <h1>{{titulo}}</h1>
+    </div>
+  
+    <br><br>
+  
+    <form class="form-group row">
+
+  
+  
+      <div class="form-group col-md-3">
+  
+        <label for="email">Email:</label>
+        <input type="text" name="email" id="email" placeholder="Email" class="form-control"
+          [(ngModel)]="cuadroEmail">
+  
+      </div>
+  
+      <div class="form-group col-md-3">
+  
+        <label for="contraseña">Contraseña:</label>
+        <input type="password" name="contraseña" id="contraseña" placeholder="Contraseña" class="form-control" [(ngModel)]="cuadroPassword">
+  
+      </div>
+  
+  
+      <div class="col">
+  
+        <button type="submit" style="margin-top: 35px;" class="btn btn-primary" (click)="enviarFormulario()">Enviar</button>
+  
+      </div>
+  
+    </form>
