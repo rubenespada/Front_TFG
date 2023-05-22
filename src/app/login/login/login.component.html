@@ -1,35 +1,31 @@
-<div class="container">
 
-    <div class="col" style="text-align:center;">
-      <h1>{{titulo}}</h1>
-    </div>
+<body class="container fondo-pantalla">
+<div>
+
+
   
     <br><br>
   
-    <form class="form-group row">
 
-  
-  
-      <div class="form-group col-md-3">
-  
-        <label for="email">Email:</label>
-        <input type="text" name="email" id="email" placeholder="Email" class="form-control"
-          [(ngModel)]="cuadroEmail">
-  
+
+
+    <form class="container formularios border rounded bg-dark">
+
+      <div class="col" style="text-align:center;">
+        <h1 class="text-light mt-3">{{titulo}}</h1>
       </div>
-  
-      <div class="form-group col-md-3">
-  
-        <label for="contraseña">Contraseña:</label>
-        <input type="password" name="contraseña" id="contraseña" placeholder="Contraseña" class="form-control" [(ngModel)]="cuadroPassword">
-  
+
+      <div class="mb-3 mt-3">
+        <label for="email" class="form-label text-light">Email:</label>
+        <input type="email" class="form-control" id="email" aria-describedby="emailHelp" [(ngModel)]="cuadroPassword">
+        <div id="emailHelp" class="form-text">No compartiremos su email con nadie más.</div>
       </div>
-  
-  
-      <div class="col">
-  
-        <button type="submit" style="margin-top: 35px;" class="btn btn-primary" (click)="enviarFormulario()">Enviar</button>
-  
+      <div class="mb-3">
+        <label for="password" class="form-label text-light">Contraseña:</label>
+        <input type="password" class="form-control" id="password" [(ngModel)]="cuadroPassword">
       </div>
-  
+      <button type="submit" class="btn btn-primary mb-3" (click)="enviarFormulario()">Enviar</button>
     </form>
+
+    </div>
+  </body>
