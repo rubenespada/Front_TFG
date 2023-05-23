@@ -17,12 +17,12 @@
 
       <div class="mb-3 mt-3">
         <label for="email" class="form-label text-light">Email:</label>
-        <input type="email" class="form-control" id="email" aria-describedby="emailHelp" [(ngModel)]="cuadroPassword">
+        <input type="email" class="form-control" id="email" aria-describedby="emailHelp" [(ngModel)]="cuadroEmail" name="email">
         <div id="emailHelp" class="form-text">No compartiremos su email con nadie más.</div>
       </div>
       <div class="mb-3">
         <label for="password" class="form-label text-light">Contraseña:</label>
-        <input type="password" class="form-control" id="password" [(ngModel)]="cuadroPassword">
+        <input type="password" class="form-control" id="password" [(ngModel)]="cuadroPassword" name="password">
       </div>
       <button type="submit" class="btn btn-primary mb-3" (click)="enviarFormulario()">Enviar</button>
     </form>

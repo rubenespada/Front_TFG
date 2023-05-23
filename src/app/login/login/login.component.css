@@ -1,8 +1,17 @@
+
+
 .formularios{
-    width:35%;
+    width:25%;
 }
 
+@media (max-width:400px) {
+.formularios{
+    width:65%;
+}
+}
+
+
 .fondo-pantalla{
-    background-image: url("../../../assets/images/fondo_pantalla.png");
-    
+    background: url("../../../assets/images/fondo_pantalla.png")  center center fixed; 
+    min-width: 100%;
 }
