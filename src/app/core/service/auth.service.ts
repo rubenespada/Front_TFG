@@ -17,7 +17,6 @@ export class AuthService {
       email:email,
       password:password
     }
-    console.log(body);
     return this.http.post("http://localhost:8081/login",body,{observe: 'response'}).pipe(
       map((response) => {
         const  JWTtoken = response.headers.get('Authorization');

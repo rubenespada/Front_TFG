@@ -1,24 +1,45 @@
 <body class="container fondo-pantalla">
-    <div>
-        <br><br>
-    
-        <form class="container formularios border rounded bg-dark">
-    
-          <div class="col" style="text-align:center;">
-            <h1 class="text-light mt-3"></h1>
-          </div>
-    
-          <div class="mb-3 mt-3">
-            <label for="email" class="form-label text-light">Email:</label>
-            <input type="email" class="form-control" id="email" aria-describedby="emailHelp"  name="email">
-            <div id="emailHelp" class="form-text">No compartiremos su email con nadie más.</div>
-          </div>
-          <div class="mb-3">
-            <label for="password" class="form-label text-light">Contraseña:</label>
-            <input type="password" class="form-control" id="password"  name="password">
-          </div>
-          <button type="submit" class="btn btn-primary mb-3">Enviar</button>
-        </form>
-    
+  <div>
+    <br><br>
+
+    <form class="container formularios border rounded bg-dark">
+
+      <div class="col" style="text-align:center;">
+        <h1 class="text-light mt-3 border-bottom border-light">{{titulo}}</h1>
+      </div>
+
+      <hr>
+      <div *ngIf="!registrado">
+        <div class="mb-3">
+          <label for="nombre" class="form-label text-light">Nombre:</label>
+          <input type="nombre" class="form-control" id="nombre" name="nombre" [(ngModel)]="cuadroNombre">
         </div>
-      </body>
+
+        <div class="mb-3">
+          <label for="apellidos" class="form-label text-light">Apellidos:</label>
+          <input type="apellidos" class="form-control" id="apellidos" name="apellidos" [(ngModel)]="cuadroApellidos">
+        </div>
+
+        <div class="mb-3 mt-3">
+          <label for="email" class="form-label text-light">Email:</label>
+          <input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email"
+            [(ngModel)]="cuadroEmail">
+          <div id="emailHelp" class="form-text">No compartiremos su email con nadie más.</div>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label text-light">Contraseña:</label>
+          <input type="password" class="form-control" id="password" name="password" [(ngModel)]="cuadroPassword">
+        </div>
+        <button type="submit" class="btn btn-primary mb-3" (click)="registrarse()">Enviar</button>
+      </div>
+
+      <div  *ngIf="registrado">
+        <p class="text-light text-center">Usuario registrado correctamente</p>
+        <p class="text-center"><a class="text-light fw-bold" href="/auth/login">Ir a login</a></p>
+        
+  </div>
+
+  </form>
+
+  </div>
+</body>
