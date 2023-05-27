@@ -1,0 +1,15 @@
+<div class="container">
+    <div class="row justify-content-center mt-4">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header bg-primary text-white">
+            Detalles de la cuenta
+          </div>
+          <div class="card-body" *ngIf="userAccount">
+            <p class="card-text"><strong>Propietario:</strong> {{ nombreUsuario }}</p>
+            <p class="card-text"><strong>Saldo:</strong> {{ userAccount.saldo }} €</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

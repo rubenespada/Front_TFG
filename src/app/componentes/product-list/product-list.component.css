@@ -1,0 +1,14 @@
+.img-size{
+    width: auto;
+    height: 200px;
+    object-fit: cover;
+}
+
+.fondo-pantalla{
+    background: url("../../../assets/images/fondo_tienda.png") no-repeat  center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    
+} 

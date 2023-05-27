@@ -10,11 +10,22 @@ import { DashboardComponent } from './dashboard.component';
 import { FormsModule } from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon'
 import { RouterModule } from '@angular/router';
+import { ProductListComponent } from 'src/app/componentes/product-list/product-list.component';
+import { CuentaComponent } from 'src/app/componentes/cuenta/cuenta.component';
+import { DialogModule } from 'primeng/dialog';
+import { ButtonModule } from 'primeng/button';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
+
+
 
 @NgModule({
   declarations: [
     //Aqui todos los componentes del dashboard
     DashboardComponent,
+    ProductListComponent,
+    CuentaComponent,
     //FormularioProjectComponent,
     //ListadoProjectComponent,
     //FormularioCodeComponent,
@@ -25,7 +36,11 @@ import { RouterModule } from '@angular/router';
     DashboardRoutingModule,
     FormsModule,
     MatIconModule,
-    RouterModule
+    RouterModule ,
+    DialogModule,
+    ButtonModule,
+
+    
   ]
 })
 export class DashboardModule { }
