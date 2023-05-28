@@ -11,9 +11,6 @@
         <li class="nav-item ml-5">
           <a class="nav-link" href="dashboard/productList">Productos</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Servicios</a>
-        </li>
       </ul>
       
       <ul class="navbar-nav">
@@ -33,11 +30,11 @@
 
 
         <button class="btn nav-link " type="button"  aria-expanded="false">
-          <img src="icon.png" alt="" class="rounded-circle" width="30" height="30">
+          <img src="../../../assets/images/icono_pred.png" alt="" class="rounded-circle" width="34" height="30">
           {{nombre}}
         </button>
         <a class="nav-link" href="dashboard/account">Cuenta</a>
-        <a class="nav-link">Hola</a>
+        <a class="nav-link" (click)="logout()">Logout</a>
         
 
       </ul>

@@ -7,7 +7,7 @@ import { DashboardComponent } from './dashboard.component';
 //import { ListadoProjectComponent } from 'src/app/components/listado-project/listado-project.component';
 //import { FormularioCodeComponent } from 'src/app/components/formulario-code/formulario-code.component';
 //import { ListadoCodeComponent } from 'src/app/components/listado-code/listado-code.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon'
 import { RouterModule } from '@angular/router';
 import { ProductListComponent } from 'src/app/componentes/product-list/product-list.component';
@@ -39,6 +39,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     RouterModule ,
     DialogModule,
     ButtonModule,
+    ReactiveFormsModule
 
     
   ]

@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Usuario } from '../model/usuario.model';
 import { map } from 'rxjs';
 import jwt_decode from 'jwt-decode';
 @Injectable({
@@ -23,8 +22,6 @@ export class AuthService {
         let jwtDecoded:any = jwt_decode(JWTtoken!);
         localStorage.setItem('Token',JWTtoken!);
         localStorage.setItem('nombre',jwtDecoded.nombre);
-        localStorage.setItem('admin',jwtDecoded.admin);
-        localStorage.setItem('id',jwtDecoded.id);
         return 1;
       })
       
@@ -40,12 +37,32 @@ export class AuthService {
     return localStorage.getItem('Token')!;
   }
 
+  getRol():boolean{
+      let  JWTtoken = localStorage.getItem('Token');
+      let jwtDecoded:any = jwt_decode(JWTtoken!);
+      return jwtDecoded.admin;
+  }
+
   isLoggedIn():boolean{
     if(this.getToken() != null && this.getToken() != ''){
       return true;
     }else{
       return false;
     }
+  }
+
+  isAdmin():boolean{
+    if(this.getRol() == true){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  getUserId(){
+    let  JWTtoken = localStorage.getItem('Token');
+    let jwtDecoded:any = jwt_decode(JWTtoken!);
+    return jwtDecoded.id;
   }
 
   

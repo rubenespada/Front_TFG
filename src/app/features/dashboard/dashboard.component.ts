@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,7 +11,7 @@ export class DashboardComponent implements OnInit {
   nombre:any;
 
 
-
+constructor(private router:Router){}
 
 ngOnInit(): void {
   this.loadNombrePerfil();
@@ -18,7 +19,10 @@ ngOnInit(): void {
 
 
 
-
+logout(){
+  localStorage.clear();
+  this.router.navigate(['/auth']);
+}
 
 
 
