@@ -15,6 +15,9 @@ import { CuentaComponent } from 'src/app/componentes/cuenta/cuenta.component';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PurchaseListComponent } from 'src/app/componentes/purchase-list/purchase-list.component';
+import { TableModule } from 'primeng/table';
+
 
 
 
@@ -26,6 +29,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     DashboardComponent,
     ProductListComponent,
     CuentaComponent,
+    PurchaseListComponent,
     //FormularioProjectComponent,
     //ListadoProjectComponent,
     //FormularioCodeComponent,
@@ -39,7 +43,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     RouterModule ,
     DialogModule,
     ButtonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TableModule
 
     
   ]

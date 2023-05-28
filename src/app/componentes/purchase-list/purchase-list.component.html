@@ -1,1 +1,18 @@
-<p>purchase-list works!</p>
+<p-table [value]="purchases" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Id</th>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Total</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-purchase>
+        <tr>
+            <td>{{ purchase.id }}</td>
+            <td>{{ purchase.product.nombre }}</td>
+            <td>{{ purchase.cantidad }}</td>
+            <td>{{ purchase.coste }}</td>
+        </tr>
+    </ng-template>
+</p-table>
