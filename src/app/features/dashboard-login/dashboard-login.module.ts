@@ -2,13 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon'
 import { RouterModule } from '@angular/router';
 import { DashboardLoginRoutingModule } from './dashboard-login-routing.module';
 import { DashboardLoginComponent } from './dashboard-login.component';
 import { LoginComponent } from 'src/app/login/login/login.component';
 import { SignupComponent } from 'src/app/login/signup/signup.component';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,9 @@ import { SignupComponent } from 'src/app/login/signup/signup.component';
     DashboardLoginRoutingModule,
     FormsModule,
     MatIconModule,
-    RouterModule
+    RouterModule,
+    ReactiveFormsModule,
+    ButtonModule
   ]
 })
 export class DashboardLoginModule { }

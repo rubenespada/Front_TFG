@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Usuario } from 'src/app/core/model/usuario.model';
 import { UserService } from 'src/app/core/service/user.service';
 
@@ -7,28 +8,39 @@ import { UserService } from 'src/app/core/service/user.service';
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
-export class SignupComponent {
+export class SignupComponent implements OnInit {
 
-  constructor(private userService:UserService){}
 
   titulo:string = "Sign up";
 
-  cuadroNombre:string = "";
-
-  cuadroApellidos:string = "";
-
-  cuadroEmail:string = "";
-  
-  cuadroPassword:string = "";
-
   registrado:boolean = false;
+
+  formularioRegistro!:FormGroup;
+
+  constructor(private userService:UserService,private formBuilder: FormBuilder){}
+  ngOnInit(): void {
+    this.formularioRegistro = this.formBuilder.group({
+      nombre: ['', Validators.required],
+      apellidos: ['', Validators.required],
+      email: ['', [Validators.required,Validators.email]],
+      password: ['', Validators.required]
+    });
+  }
+
+  get nombre(){return this.formularioRegistro.get('nombre')}
+  get apellidos(){return this.formularioRegistro.get('apellidos')}
+  get email(){return this.formularioRegistro.get('email')}
+  get password(){return this.formularioRegistro.get('password')}
+
+
+
 
   registrarse(){
     const usuario:Usuario = {
-      nombre:this.cuadroNombre
-      ,apellidos:this.cuadroApellidos
-      ,email:this.cuadroEmail
-      ,password:this.cuadroPassword
+      nombre:this.formularioRegistro.value.nombre,
+      apellidos:this.formularioRegistro.value.apellidos,
+      email:this.formularioRegistro.value.email,
+      password:this.formularioRegistro.value.password
     }
     this.userService.addUser(usuario).subscribe(
       (response) => {

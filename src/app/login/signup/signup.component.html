@@ -9,29 +9,29 @@
       </div>
 
       <hr>
-      <div *ngIf="!registrado">
+      <form *ngIf="!registrado" [formGroup]="formularioRegistro">
         <div class="mb-3">
-          <label for="nombre" class="form-label text-light">Nombre:</label>
-          <input type="nombre" class="form-control" id="nombre" name="nombre" [(ngModel)]="cuadroNombre">
+          <label for="nombre" class="form-label text-light">Nombre: <span style="color: red" *ngIf="nombre && nombre.invalid && nombre.touched">*</span></label>
+          <input type="txt" class="form-control" id="nombre" formControlName="nombre" >
         </div>
 
         <div class="mb-3">
-          <label for="apellidos" class="form-label text-light">Apellidos:</label>
-          <input type="apellidos" class="form-control" id="apellidos" name="apellidos" [(ngModel)]="cuadroApellidos">
+          <label for="apellidos" class="form-label text-light">Apellidos: <span style="color: red" *ngIf="apellidos && apellidos.invalid && apellidos.touched">*</span></label>
+          <input type="text" class="form-control" id="apellidos" formControlName="apellidos">
         </div>
 
         <div class="mb-3 mt-3">
           <label for="email" class="form-label text-light">Email:</label>
-          <input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email"
-            [(ngModel)]="cuadroEmail">
+          <input type="text" class="form-control" id="email" aria-describedby="emailHelp" formControlName="email">
+          <span style="color: red" *ngIf="email && email.invalid && email.touched">Email inválido</span>
           <div id="emailHelp" class="form-text">No compartiremos su email con nadie más.</div>
         </div>
         <div class="mb-3">
-          <label for="password" class="form-label text-light">Contraseña:</label>
-          <input type="password" class="form-control" id="password" name="password" [(ngModel)]="cuadroPassword">
+          <label for="password" class="form-label text-light">Contraseña: <span style="color: red" *ngIf="password && password.invalid && password.touched">*</span></label>
+          <input type="password" class="form-control" id="password" formControlName="password">
         </div>
-        <button type="submit" class="btn btn-primary mb-3" (click)="registrarse()">Enviar</button>
-      </div>
+        <button type="submit" class="btn btn-primary mb-3" (click)="registrarse()" [disabled]="formularioRegistro.invalid">Enviar</button>
+    </form>
 
       <div  *ngIf="registrado">
         <p class="text-light text-center">Usuario registrado correctamente</p>

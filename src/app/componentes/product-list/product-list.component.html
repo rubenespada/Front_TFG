@@ -44,13 +44,21 @@
             <input type="number" class="form-control" id="precio" value="{{ product.precio }}"  disabled>
           </div>
           <div class="form-group">
+            <label for="saldo">Saldo:</label>
+            <input type="number" class="form-control" id="saldo" value="{{ cuentaCompra.saldo }}"  disabled>
+          </div>
+          <div class="form-group">
             <label for="total">Total:</label>
             <input type="number" class="form-control" id="total" value="{{ cantidad * product.precio }}" onchange="setTotal(product.precio)" disabled>
+          </div>
+          <div class="form-group">
+            <label for="saldofinal">Saldo final:</label>
+            <input type="number" class="form-control" id="saldofinal" value="{{ cuentaCompra.saldo - (cantidad * product.precio) }}"  disabled>
           </div>
         </div>
       </div>
       <div class="text-right">
-        <button type="button" class="btn btn-success" (click)="realizarCompra(product.id,cantidad)">Confirmar</button>
+        <button type="button" class="btn btn-success" (click)="realizarCompra(product.id,cantidad)" [disabled]="cantidad > product.stock || cantidad < 1 || cuentaCompra.saldo < (cantidad * product.precio)">Confirmar</button>
         <button type="button" class="btn btn-danger" (click)="hideModalCompra()">Cancelar</button>
       </div>
     </div>
@@ -58,25 +66,25 @@
 
 
   <p-dialog header="Modificar Producto" [(visible)]="modalModificacion" [modal]="true" [responsive]="true">
-    <form [formGroup]="formualarioProducto">
+    <form [formGroup]="formularioProducto">
       <div>
         <div class="form-group">
-          <label for="nombre">Nombre:</label>
+          <label for="nombre">Nombre: <span style="color: red" *ngIf="nombre && nombre.invalid && nombre.touched">*</span></label>
           <input type="text" id="nombre" formControlName="nombre" class="form-control">
         </div>
   
         <div class="form-group">
-          <label for="descripcion">Descripción:</label>
+          <label for="descripcion">Descripción: <span style="color: red" *ngIf="descripcion && descripcion.invalid && descripcion.touched">*</span></label>
           <input type="text" id="descripcion" formControlName="descripcion" class="form-control">
         </div>
   
         <div class="form-group">
-          <label for="stock">Stock:</label>
+          <label for="stock">Stock: <span style="color: red" *ngIf="stock && stock.invalid && stock.touched">*</span></label>
           <input type="number" id="stock" formControlName="stock" class="form-control">
         </div>
   
         <div class="form-group">
-          <label for="precio">Precio:</label>
+          <label for="precio">Precio: <span style="color: red" *ngIf="precio && precio.invalid && precio.touched">*</span></label>
           <input type="number" id="precio" formControlName="precio" class="form-control">
         </div>
   
@@ -87,7 +95,7 @@
       </div>
   
       <div class="mt-3">
-        <button  type="button"  (click)="enviarFormularioModificacion()" class="btn btn-success">Guardar</button>
+        <button  type="button"  (click)="enviarFormularioModificacion()" class="btn btn-success" [disabled]="formularioProducto.invalid">Guardar</button>
         <button  type="button"  (click)="hideModalModificacion()" class="btn btn-danger">Cancelar</button>
       </div>
     </form>

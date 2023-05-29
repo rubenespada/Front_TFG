@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { environment } from 'src/app/core/environment/environment';
 import { Product } from 'src/app/core/model/product.model';
+import { AccountService } from 'src/app/core/service/account.service';
 import { AuthService } from 'src/app/core/service/auth.service';
 import { ImageService } from 'src/app/core/service/image.service';
 import { ProductService } from 'src/app/core/service/product.service';
@@ -28,17 +29,20 @@ export class ProductListComponent implements OnInit {
 
   cantidad:number = 1;
 
-  formualarioProducto!:FormGroup;
+  formularioProducto!:FormGroup;
 
   modificar:boolean = false;
 
+  cuentaCompra:any;
 
-  constructor(private productService:ProductService, private purchaseService:PurchaseService, private authService:AuthService, private formBuilder: FormBuilder,private imageService:ImageService){}
+
+  constructor(private productService:ProductService, private purchaseService:PurchaseService, private authService:AuthService, private formBuilder: FormBuilder,private imageService:ImageService, private accountService:AccountService){}
 
   ngOnInit(): void {
     this.loadProductList();
+    this.loadAccount();
     this.admin = this.authService.isAdmin();
-    this.formualarioProducto = this.formBuilder.group({
+    this.formularioProducto = this.formBuilder.group({
       id:null,
       nombre: ['', Validators.required],
       descripcion: ['', Validators.required],
@@ -48,6 +52,12 @@ export class ProductListComponent implements OnInit {
     });
   }
 
+  get nombre(){return this.formularioProducto.get('nombre');}
+  get descripcion(){return this.formularioProducto.get('descripcion');}
+  get stock(){return this.formularioProducto.get('stock');}
+  get precio(){return this.formularioProducto.get('precio');}
+
+
   loadProductList(){
     this.productService.getAllProduct().subscribe(response => {
       this.productList = response;
@@ -56,6 +66,16 @@ export class ProductListComponent implements OnInit {
     (error) => {
       console.log(error);
     })
+  }
+
+  loadAccount(){
+    this.accountService.retrieveAccount().subscribe(response => {
+      this.cuentaCompra = response;
+    },
+    (error => {
+      console.log(error);
+    })
+    )
   }
 
   showModalCompra(selectedProduct:Product){
@@ -107,7 +127,7 @@ export class ProductListComponent implements OnInit {
   onFileSelected(event:any) {
     const file = event.target.files[0];
     if(file){
-      this.formualarioProducto.value.imagen = file;
+      this.formularioProducto.value.imagen = file;
     }
     
   }
@@ -115,7 +135,7 @@ export class ProductListComponent implements OnInit {
 
   loadForm(product:any){
     if (product){
-      this.formualarioProducto = this.formBuilder.group({
+      this.formularioProducto = this.formBuilder.group({
         id:[product.id],
         nombre: [product.nombre, Validators.required],
         descripcion: [product.descripcion, Validators.required],
@@ -124,7 +144,7 @@ export class ProductListComponent implements OnInit {
         imagen: ['']
       });
     }else{
-      this.formualarioProducto = this.formBuilder.group({
+      this.formularioProducto = this.formBuilder.group({
         id:null,
         nombre: ['', Validators.required],
         descripcion: ['', Validators.required],
@@ -140,17 +160,17 @@ export class ProductListComponent implements OnInit {
 
   enviarFormularioModificacion(){
     const body:Product = {
-      id: this.formualarioProducto.value.id,
-      nombre: this.formualarioProducto.value.nombre,
-      descripcion: this.formualarioProducto.value.descripcion,
-      stock: this.formualarioProducto.value.stock,
-      precio: this.formualarioProducto.value.precio,
-      imagen: this.formualarioProducto.value.imagen.name
+      id: this.formularioProducto.value.id,
+      nombre: this.formularioProducto.value.nombre,
+      descripcion: this.formularioProducto.value.descripcion,
+      stock: this.formularioProducto.value.stock,
+      precio: this.formularioProducto.value.precio,
+      imagen: this.formularioProducto.value.imagen.name
     }
     if(this.modificar){
       this.productService.updateProduct(body).subscribe(response => {
         console.log(response);
-        if(this.formualarioProducto.value.imagen){
+        if(this.formularioProducto.value.imagen){
           this.uploadImageProduct();
         }
         this.hideModalModificacion();
@@ -162,7 +182,7 @@ export class ProductListComponent implements OnInit {
       );
     }else{
         this.productService.createProduct(body).subscribe(response => {
-          if(this.formualarioProducto.value.imagen){
+          if(this.formularioProducto.value.imagen){
             this.uploadImageProduct();
           }
           this.hideModalModificacion();
@@ -177,7 +197,7 @@ export class ProductListComponent implements OnInit {
 
   uploadImageProduct(){
     let image = new FormData();
-    image.append('file',this.formualarioProducto.value.imagen);
+    image.append('file',this.formularioProducto.value.imagen);
     this.imageService.uploadFile(image).subscribe(response => {
       console.log(response);
     },
