@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MessageService } from 'primeng/api';
 import { environment } from 'src/app/core/environment/environment';
 import { Product } from 'src/app/core/model/product.model';
 import { AccountService } from 'src/app/core/service/account.service';
@@ -36,7 +37,7 @@ export class ProductListComponent implements OnInit {
   cuentaCompra:any;
 
 
-  constructor(private productService:ProductService, private purchaseService:PurchaseService, private authService:AuthService, private formBuilder: FormBuilder,private imageService:ImageService, private accountService:AccountService){}
+  constructor(private productService:ProductService, private purchaseService:PurchaseService, private authService:AuthService, private formBuilder: FormBuilder,private imageService:ImageService, private accountService:AccountService,private messageService:MessageService){}
 
   ngOnInit(): void {
     this.loadProductList();
@@ -106,7 +107,9 @@ export class ProductListComponent implements OnInit {
 
   realizarCompra(productId:number,cantidadComprada:number){
     this.purchaseService.makePurchase(productId,cantidadComprada).subscribe(response => {
+      this.loadProductList();
       this.modalCompra = false;
+      this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Compra realizada', detail: 'Compra realizada con éxito',life:10000 });
     },
     (error => {
       console.log(error);
@@ -175,6 +178,7 @@ export class ProductListComponent implements OnInit {
         }
         this.hideModalModificacion();
         this.loadProductList();
+        this.messageService.add({ key: 'myKey4', severity: 'success', summary: 'Producto modificado', detail: 'Producto modificado con éxito',life:10000 });
       },
       (error =>{
         console.log(error);
@@ -187,6 +191,7 @@ export class ProductListComponent implements OnInit {
           }
           this.hideModalModificacion();
           this.loadProductList();
+          this.messageService.add({ key: 'myKey3', severity: 'success', summary: 'Producto creado', detail: 'Producto creado con éxito',life:10000 });
         },
         (error =>{
           console.log(error);
@@ -211,8 +216,11 @@ export class ProductListComponent implements OnInit {
     this.productService.deleteProduct(idProduct).subscribe(response => {
     },
     (error => {
-      this.loadProductList();
-      console.log(error);
+      if(error.status == 409){
+        this.messageService.add({ key: 'myKey2', severity: 'warn', summary: 'Error', detail: error.error.message,life:10000 });
+      }else{
+        this.loadProductList();}
+      
     })
     )
   }

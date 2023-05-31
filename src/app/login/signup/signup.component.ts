@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MessageService } from 'primeng/api';
 import { Usuario } from 'src/app/core/model/usuario.model';
 import { UserService } from 'src/app/core/service/user.service';
 
@@ -17,7 +18,7 @@ export class SignupComponent implements OnInit {
 
   formularioRegistro!:FormGroup;
 
-  constructor(private userService:UserService,private formBuilder: FormBuilder){}
+  constructor(private userService:UserService,private formBuilder: FormBuilder, private messageService:MessageService){}
   ngOnInit(): void {
     this.formularioRegistro = this.formBuilder.group({
       nombre: ['', Validators.required],
@@ -48,7 +49,7 @@ export class SignupComponent implements OnInit {
         this.registrado = true;
       },
       (error) =>{
-        console.log("Error: " + error);
+        this.messageService.add({ key: 'myKey2', severity: 'warn', summary: 'Error', detail: error.error.message,life:10000 });
       }
     )
 

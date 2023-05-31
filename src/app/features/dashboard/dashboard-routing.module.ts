@@ -8,7 +8,7 @@ import { PurchaseListComponent } from 'src/app/componentes/purchase-list/purchas
 
 const routes: Routes = [
   {path:'',component:DashboardComponent,canActivate:[AuthGuard],children:[
-    {path:'productList',component:ProductListComponent},
+    {path:'',component:ProductListComponent},
     {path:'account',component:CuentaComponent},
     {path:'purchases',component:PurchaseListComponent}
   ]}

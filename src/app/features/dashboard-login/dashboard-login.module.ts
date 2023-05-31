@@ -10,6 +10,8 @@ import { DashboardLoginComponent } from './dashboard-login.component';
 import { LoginComponent } from 'src/app/login/login/login.component';
 import { SignupComponent } from 'src/app/login/signup/signup.component';
 import { ButtonModule } from 'primeng/button';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { ButtonModule } from 'primeng/button';
     MatIconModule,
     RouterModule,
     ReactiveFormsModule,
-    ButtonModule
-  ]
+    ButtonModule,
+    ToastModule
+  ],
+  providers:[MessageService]
 })
 export class DashboardLoginModule { }

@@ -11,7 +11,6 @@ import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthInterceptorService } from './core/service/auth-interceptor.service';
-import { PurchaseListComponent } from './componentes/purchase-list/purchase-list.component';
 
 
 

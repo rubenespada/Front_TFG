@@ -17,6 +17,8 @@ import { ButtonModule } from 'primeng/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PurchaseListComponent } from 'src/app/componentes/purchase-list/purchase-list.component';
 import { TableModule } from 'primeng/table';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 
 
@@ -44,9 +46,10 @@ import { TableModule } from 'primeng/table';
     DialogModule,
     ButtonModule,
     ReactiveFormsModule,
-    TableModule
-
+    TableModule,
+    ToastModule
     
-  ]
+  ],
+  providers:[MessageService]
 })
 export class DashboardModule { }

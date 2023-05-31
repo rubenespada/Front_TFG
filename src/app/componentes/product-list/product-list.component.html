@@ -1,6 +1,6 @@
-<body class="container fondo-pantalla">
+<body class="fondo-pantalla mt-0">
   <div class="col" style="text-align:center;">
-    <h1 class="mt-3 border-bottom text">Productos</h1><span *ngIf="admin"><button type="button" class="btn btn-success" (click)="showModalModificacion()">Añadir</button></span>
+    <h1 class="mt-3 text">Productos</h1><span *ngIf="admin"><button type="button" class="btn btn-success" (click)="showModalModificacion()">Añadir</button></span>
   </div>
 
 <div class="container">
@@ -13,11 +13,11 @@
             <p class="card-text">{{ product.descripcion }}</p>
             <p class="card-text">Stock: {{ product.stock }}</p>
             <p class="card-text">Precio: {{ product.precio }}</p>
-            <button *ngIf="!admin && product.stock > 0" class="btn btn-primary" (click)="showModalCompra(product)">Comprar</button>
+            <button *ngIf="!admin && product.stock && cuentaCompra" class="btn btn-primary" (click)="showModalCompra(product)">Comprar</button>
             <div *ngIf="admin">
                 <button class="btn btn-warning text-light" (click)="showModalModificacion(product)"><mat-icon>edit</mat-icon></button>
                 <button class="btn btn-danger" (click)="deleteProduct(product.id)"><mat-icon>delete</mat-icon></button>
-              
+                <p-toast key="myKey2"></p-toast>
             </div>
           </div>
         </div>
@@ -63,6 +63,7 @@
       </div>
     </div>
   </p-dialog>
+  <p-toast key="myKey1"></p-toast>
 
 
   <p-dialog header="Modificar Producto" [(visible)]="modalModificacion" [modal]="true" [responsive]="true">
@@ -100,4 +101,7 @@
       </div>
     </form>
   </p-dialog>
+  <p-toast key="myKey3"></p-toast>
+  <p-toast key="myKey4"></p-toast>
+
 </body>
