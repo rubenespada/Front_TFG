@@ -66,7 +66,7 @@
   <p-toast key="myKey1"></p-toast>
 
 
-  <p-dialog header="Modificar Producto" [(visible)]="modalModificacion" [modal]="true" [responsive]="true">
+  <p-dialog [header]="modificar ? 'Modificar producto' : 'Añadir producto'" [(visible)]="modalModificacion" [modal]="true" [responsive]="true">
     <form [formGroup]="formularioProducto">
       <div>
         <div class="form-group">

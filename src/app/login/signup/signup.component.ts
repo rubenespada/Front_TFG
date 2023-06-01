@@ -49,7 +49,12 @@ export class SignupComponent implements OnInit {
         this.registrado = true;
       },
       (error) =>{
+        if (error.status == 0){
+          this.messageService.add({ key: 'myKey2', severity: 'warn', summary: 'Error', detail: 'Servidor inoperativo',life:10000 });
+
+        }else{
         this.messageService.add({ key: 'myKey2', severity: 'warn', summary: 'Error', detail: error.error.message,life:10000 });
+        }
       }
     )
 
